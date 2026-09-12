@@ -12,10 +12,7 @@ import { LoginPage } from "../../pages/saucedemo/login.page";
 const authStatePath = getAuthStatePath("standard_auth.json");
 
 test.describe("Taller 6 - Estado, cookies y data-driven", () => {
-  test("Generar storageState, reutilizar sesión y validar cookies", async ({
-    page,
-    browser,
-  }) => {
+  test("Generar storageState, reutilizar sesión y validar cookies", async ({page,browser}) => {
     const login = new LoginPage(page);
 
     await test.step("Ir a login y autenticar usuario estándar", async () => {

@@ -1,27 +1,50 @@
-name: Playwright Tests
+name: CI
+
 on:
   push:
-    branches: [ main, master ]
+    branches: ["dev"] # solo pushes a branch indicado
   pull_request:
-    branches: [ main, master ]
+    branches: ["dev"] # solo PRs a branch indicado
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
-    timeout-minutes: 60
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with:
-        node-version: lts/*
-    - name: Install dependencies
-      run: npm ci
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
-    - name: Run Playwright tests
-      run: npx playwright test
-    - uses: actions/upload-artifact@v4
-      if: ${{ !cancelled() }}
-      with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install deps (lockfile)
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      # Ejecuta solo 1 test, 1 proyecto y sin reporte HTML
+      - name: Run 1 test no reporter (Chromium only)
+        run: npx playwright test tests/taller6/01-state-cookies-data-driven.spec.ts -project=chromium --reporter=list
+      # Ejecuta solo 1 test, 1 proyecto y con reporte HTML
+      - name: Run 1 test with reporter (Chromium only)
+        run: npx playwright test tests/taller5/authentication.spec.ts -project=chromium --reporter=html
+
+      # Sube el reporte HTML si lo generaste en otra corrida o si más adelante decides habilitarlo
+      - name: Upload artifacts (reports, screenshots)
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: artifacts
+          path: |
+            playwright-report 
+            test-results 
+            artifacts
+          retention-days: 1

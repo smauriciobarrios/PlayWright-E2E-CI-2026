@@ -11,15 +11,19 @@
     "taller4": "npx playwright test tests/taller4/dialogAndUpload.spec.ts",
     "tarea2": "npx playwright test tests/tarea2/SD_Login.spec.ts",
     "taller5": "npx playwright test tests/taller5 --headed",
-    "tarea3": "npx playwright test tests/tarea3/AE.spec.ts"
+    "tarea3": "npx playwright test tests/tarea3/AE.spec.ts",
+    "integrador": "npx playwright test tests/integrador/AE_Integrador.spec.ts",
+    "integrador.suite1:chromium": "npx playwright test tests/integrador/AE_SignUp.spec.ts --project=chromium --workers=1 --ui",
+    "integrador:suite2.webkit": "npx playwright test tests/integrador/AE_Integrador.spec.ts --project=webkit --workers=1 --ui",
+    "integrador:suite3.default": "npx playwright test tests/integrador"
   },
   "keywords": [],
   "author": "Sergio Barrios",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.62.1",
-    "@types/node": "^26.2.0",
-    "tsx": "^4.23.11",
+    "@types/node": "^26.4.1",
+    "tsx": "^4.23.13",
     "typescript": "^7.0.2"
   }
 }

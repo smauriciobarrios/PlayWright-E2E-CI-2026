@@ -1,0 +1,7 @@
+node_modules 
+artifacts 
+.git 
+.env 
+.github 
+.vscode 
+*.log  
