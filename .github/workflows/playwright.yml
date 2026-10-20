@@ -32,10 +32,10 @@ jobs:
 
       # Ejecuta solo 1 test, 1 proyecto y sin reporte HTML
       - name: Run 1 test no reporter (Chromium only)
-        run: npx playwright test tests/taller6/01-state-cookies-data-driven.spec.ts -project=chromium --reporter=list
+        run: npx playwright test tests/taller6/01-state-cookies-data-driven.spec.ts --project=chromium --reporter=list
       # Ejecuta solo 1 test, 1 proyecto y con reporte HTML
       - name: Run 1 test with reporter (Chromium only)
-        run: npx playwright test tests/taller5/authentication.spec.ts -project=chromium --reporter=html
+        run: npx playwright test tests/taller5/authentication.spec.ts --project=chromium --reporter=html
 
       # Sube el reporte HTML si lo generaste en otra corrida o si más adelante decides habilitarlo
       - name: Upload artifacts (reports, screenshots)
