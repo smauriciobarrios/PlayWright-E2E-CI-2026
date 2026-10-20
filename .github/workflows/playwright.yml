@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: ["dev"] # solo pushes a branch indicado
+    branches: ["main"] # solo pushes a branch indicado
   pull_request:
-    branches: ["dev"] # solo PRs a branch indicado
+    branches: ["main"] # solo PRs a branch indicado
 
 concurrency:
   group: ci-${{ github.ref }}
